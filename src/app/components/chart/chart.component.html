@@ -1,0 +1,6 @@
+<div class="chart-container">
+        <div *ngIf="chartIndex !== 2" style="display: block;">
+                <canvas baseChart [data]="chartData" [type]="chartType" [options]="chartOptions"></canvas>
+        </div>
+        <div class="third-chart" *ngIf="chartIndex === 2">{{chartTitle}}</div>
+</div>

@@ -1,0 +1,67 @@
+<div class="monitor-page-root">
+    <div class="table-container">
+        <div>
+            <mat-form-field style="width: 100%;">
+                <mat-label>Filter by ID</mat-label>
+                <input matInput (input)="applyIdFilter()" [(ngModel)]="dataService.idFilter" placeholder="Filter by ID"
+                    #idInput="ngModel" name="idInput" />
+                <div *ngIf="idInput?.dirty || idInput?.touched" class="text-danger">
+                    <div>To search for multiple choices, put commas without spaces between each value.</div>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%;">
+                <mat-label>Filter by Name</mat-label>
+                <input matInput (input)="applyNameFilter()" [(ngModel)]="dataService.nameFilter"
+                    placeholder="Filter by name" #nameInput="ngModel" />
+            </mat-form-field>
+
+            <mat-radio-group name="filterStatus" [(ngModel)]="filterStatus" (change)="applyStatusFilter()"
+                aria-label="Filter Status">
+                <mat-radio-button class="example-margin" value="both">Both</mat-radio-button>
+                <mat-radio-button class="example-margin" value="passed">Passed</mat-radio-button>
+                <mat-radio-button class="example-margin" value="failed">Failed</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <table mat-table [dataSource]="filteredTrainees" class="mat-elevation-z8">
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let trainee"
+                    [ngClass]="{'passed': isPassed(trainee), 'failed': !isPassed(trainee)}"> {{trainee.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let trainee"
+                    [ngClass]="{'passed': isPassed(trainee), 'failed': !isPassed(trainee)}"> {{trainee.name}} </td>
+            </ng-container>
+
+            <!-- Average Column -->
+            <ng-container matColumnDef="average">
+                <th mat-header-cell *matHeaderCellDef> Average </th>
+                <td mat-cell *matCellDef="let trainee"
+                    [ngClass]="{'passed': isPassed(trainee), 'failed': !isPassed(trainee)}">
+                    {{averageGrades[trainee.id]}} </td>
+            </ng-container>
+
+            <!-- Exams Column -->
+            <ng-container matColumnDef="exams">
+                <th mat-header-cell *matHeaderCellDef> Exams </th>
+                <td mat-cell *matCellDef="let trainee"
+                    [ngClass]="{'passed': isPassed(trainee), 'failed': !isPassed(trainee)}"> {{examsCount[trainee.id]}}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{idInput.value}}"</td>
+            </tr>
+        </table>
+    </div>
+</div>

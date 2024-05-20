@@ -1,0 +1,112 @@
+<div class="data-page">
+    <div class="table-container">
+        <div class="demo-button-container">
+            <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (input)="applyFilter()" [(ngModel)]="dataService.filterData" placeholder="Filter by ID, Grade, or Date" #filterId="ngModel" name="filterId">
+                <div *ngIf="(filterId?.dirty || filterId?.touched)" class="text-danger ">
+                    <div>To search for a multiple choice, put commas without spaces between each value. </div>
+                </div>
+            </mat-form-field>
+            <button mat-raised-button (click)="openAddUserDialog()" class="demo-button">Add data</button>
+            <button mat-raised-button (click)="removeData()" class="demo-button">Remove data</button>
+        </div>
+        <table mat-table [dataSource]="tempTrainees" class="data-table">
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element" [class.selected]="selectedRow === element"
+                    (click)="selectRow(element)" (click)="showDetails(element)"> {{element.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element" [class.selected]="selectedRow === element"
+                    (click)="selectRow(element)" (click)="showDetails(element)"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element" [class.selected]="selectedRow === element"
+                    (click)="selectRow(element)" (click)="showDetails(element)"> {{element.date}} </td>
+            </ng-container>
+            <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Grade </th>
+                <td mat-cell *matCellDef="let element" [class.selected]="selectedRow === element"
+                    (click)="selectRow(element)" (click)="showDetails(element)"> {{element.grade}} </td>
+            </ng-container>
+            <ng-container matColumnDef="subject">
+                <th mat-header-cell *matHeaderCellDef> Subject </th>
+                <td mat-cell *matCellDef="let element" [class.selected]="selectedRow === element"
+                    (click)="selectRow(element)" (click)="showDetails(element)"> {{element.subject}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{filterId.value}}"</td>
+            </tr>
+        </table>
+        <mat-paginator (page)="handlePageEvent($event)" [length]="10" [pageSize]="1"
+            [showFirstLastButtons]="showFirstLastButtons" [pageSizeOptions]="pageSizeOptions" [pageIndex]="2"
+            aria-label="Select page">
+        </mat-paginator>
+    </div>
+    <div>
+        <mat-card class="data-table-detailes-wrapper" *ngIf="selectedTrainee">
+            <div class="icon-row">
+                <mat-icon class="bright-icon" (click)="updateTrainee(updateUser)">save</mat-icon>
+                <mat-icon class="bright-icon" (click)="edit()">edit</mat-icon>
+            </div>
+            <mat-card-content>
+                <p><strong>ID:</strong> {{ selectedTrainee.id }}</p>
+                <div class="data-table-detailes"><strong>Name:</strong>
+                    <input class="input-value" type="text" [(ngModel)]="updateUser.name" [value]="selectedTrainee.name"
+                    [ngClass]="{'editing': isEditing}" [disabled]="isDisabled">
+                </div>
+                <div class="data-table-detailes"><strong>Date:</strong>
+                    <input class="input-value" type="date" [(ngModel)]="updateUser.date" [value]="selectedTrainee.date"
+                    [ngClass]="{'editing': isEditing}" [disabled]="isDisabled">
+                </div>
+                <div class="data-table-detailes"><strong>Grade:</strong>
+                    <input class="input-value" type="text" [(ngModel)]="updateUser.grade"[value]="selectedTrainee.grade" 
+                    [ngClass]="{'editing': isEditing}" [disabled]="isDisabled">
+                </div>
+                <div class="data-table-detailes"><strong>Subject:</strong>
+                    <input class="input-value" type="text" [(ngModel)]="updateUser.subject" [value]="selectedTrainee.subject" 
+                    [ngClass]="{'editing': isEditing}" [disabled]="isDisabled">
+                </div>
+                <div class="data-table-detailes"><strong>Address:</strong>
+                    <input class="input-value" type="text" [(ngModel)]="updateUser.address" [value]="selectedTrainee.address" 
+                    [ngClass]="{'editing': isEditing}" [disabled]="isDisabled">
+                </div>
+                <div class="data-table-detailes"><strong>Email:</strong>
+                    <input class="input-value" type="email" [(ngModel)]="updateUser.mail" [value]="selectedTrainee.mail"
+                    [ngClass]="{'editing': isEditing}"  [disabled]="isDisabled">
+                </div>
+                <div class="data-table-detailes"><strong>City:</strong>
+                    <input class="input-value" type="text" [(ngModel)]="updateUser.city" [value]="selectedTrainee.city"
+                    [ngClass]="{'editing': isEditing}"  [disabled]="isDisabled">
+                </div>
+                <div class="data-table-detailes"><strong>Country:</strong>
+                    <input class="input-value" type="text" [(ngModel)]="updateUser.country" [value]="selectedTrainee.country" 
+                    [ngClass]="{'editing': isEditing}" [disabled]="isDisabled">
+                </div>
+                <div class="data-table-detailes"><strong>ZIP:</strong>
+                    <input class="input-value" type="text" [(ngModel)]="updateUser.ZIP"  [value]="selectedTrainee.ZIP"
+                    [ngClass]="{'editing': isEditing}"   [disabled]="isDisabled">
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="data-table-detailes-wrapper" *ngIf="!selectedTrainee">
+            <mat-card-content class="data-table-detailes">
+                <p><strong>ID:</strong> </p>
+                <p><strong>Name:</strong></p>
+                <p><strong>Date:</strong> </p>
+                <p><strong>Grade:</strong> </p>
+                <p><strong>Subject:</strong> </p>
+                <p><strong>Address:</strong></p>
+                <p><strong>Email:</strong> </p>
+                <p><strong>City:</strong> </p>
+                <p><strong>Country:</strong> </p>
+                <p><strong>ZIP:</strong></p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

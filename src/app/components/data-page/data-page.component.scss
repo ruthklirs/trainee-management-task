@@ -1,0 +1,82 @@
+.data-page {
+    padding: 30px;
+    display: flex;
+    padding-top: 0px;
+
+    .table-container {
+        width: 75%;
+    }
+
+    .data-table-detailes-wrapper {
+        margin: 35px;
+        height: 80%;
+        padding: 50px 50px 10px 10px;
+
+        .data-table-detailes {
+            margin-bottom: 10px;
+        }
+
+        .input-value.editing {
+            background-color: lightgray;
+            padding: 2px;
+        }
+    }
+
+    .text-danger {
+        size: 2px;
+        color: blue;
+        padding: 0%;
+        margin: 0%;
+    }
+
+    .data-table {
+        width: 70%;
+    }
+
+    .input-value {
+        border: none;
+        background-color: transparent;
+    }
+
+
+    table {
+        width: 100%;
+    }
+
+    .mat-mdc-form-field {
+        width: 54%;
+    }
+
+    .demo-table {
+        width: 100%;
+    }
+
+    .demo-button-container {
+        display: flex;
+        justify-content: space-around;
+        padding-bottom: 16px;
+    }
+
+    .demo-button+.demo-button {
+        margin-left: 8px;
+    }
+
+    .detail-row {
+        margin: 0;
+    }
+
+    .icon-row {
+        display: flex;
+        justify-content: end;
+        padding: 20px
+    }
+
+    .bright-icon {
+        color: #000000b0;
+        margin-right: 30px;
+    }
+
+    .selected {
+        background-color: gray;
+    }
+}

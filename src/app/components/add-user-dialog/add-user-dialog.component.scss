@@ -1,0 +1,30 @@
+// Styles for the dialog content
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+
+  // Styles for the form fields
+  .full-width {
+    width: 100%;
+    margin-bottom: 16px; // Adjust spacing between form fields
+  }
+
+  // Styles for the dialog actions
+  .mat-dialog-actions {
+    justify-content: flex-end;
+  }
+
+  .add-user {
+    padding: 85px;
+  }
+
+  // Styles for the dialog container
+  :host {
+    display: block;
+  }
+
+  // Styles for the dialog title
+  .mat-dialog-title {
+    color: #333;
+  }
+}

@@ -1,0 +1,24 @@
+<div class="analysis-page-component">
+  <div>
+    <mat-form-field style="width: 100%;">
+      <mat-label>Filter by ID</mat-label>
+      <input matInput (input)="applyIdFilter()" [(ngModel)]="dataService.idFilter" placeholder="Filter by ID"
+        #idFilter="ngModel" name="idFilter" />
+      <div *ngIf="idFilter?.dirty || idFilter?.touched" class="text-danger">
+        <div>To search for multiple choices, put commas without spaces between each value.</div>
+      </div>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%;">
+      <mat-label>Filter by Subject</mat-label>
+      <input matInput (input)="applySubjectFilter()" [(ngModel)]="dataService.subjectFilter"
+        placeholder="Filter by subject" />
+    </mat-form-field>
+  </div>
+
+  <div class="chart-wrapper" cdkDropList (cdkDropListDropped)="onDrop($event)">
+    <div class="chart" *ngFor="let item of chartItems; let i = index" cdkDrag>
+      <app-chart [chartItemKey]="item" [chartIndex]="i">{{ item }}</app-chart>
+    </div>
+  </div>
+</div>

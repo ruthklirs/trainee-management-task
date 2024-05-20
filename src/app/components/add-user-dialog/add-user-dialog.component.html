@@ -1,0 +1,53 @@
+<div mat-dialog-content>
+    <h2 mat-dialog-title>Add New User</h2>
+    <form #form="ngForm" (ngSubmit)="addTrainee(form.value)">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput name="name" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Date</mat-label>
+            <input matInput name="date" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Grade</mat-label>
+            <input matInput type="number" name="grade" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Subject</mat-label>
+            <input matInput name="subject" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Address</mat-label>
+            <input matInput name="address" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Mail</mat-label>
+            <input matInput type="email" name="mail" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>City</mat-label>
+            <input matInput name="city" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Country</mat-label>
+            <input matInput name="country" ngModel required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" cgetLabelAndValuelass="full-width">
+            <mat-label>ZIP</mat-label>
+            <input matInput name="ZIP" ngModel required>
+        </mat-form-field>
+        <div mat-dialog-actions>
+            <button mat-button (click)="onCloseClick()">Cancel</button>
+            <button type="submit" mat-button [disabled]="form.invalid" (click)="onCloseClick()">Add</button>
+        </div>
+    </form>
+</div>

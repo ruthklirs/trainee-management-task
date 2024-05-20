@@ -1,0 +1,22 @@
+.monitor-page-root {
+  margin: 35px;
+
+  .passed {
+    background-color: #72ef41d9;
+  }
+
+  .failed {
+    background-color: #ed4747d6;
+  }
+
+  .text-danger {
+    size: 2px;
+    color: blue;
+    padding: 0%;
+    margin: 0%;
+  }
+
+  .example-margin {
+    margin: 0 10px;
+  }
+}

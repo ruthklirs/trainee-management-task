@@ -1,0 +1,29 @@
+.navBar-links-wrapper {
+  margin-top: 30px;
+  max-width: 100%;
+  align-self: center;
+
+  .navBar-links {
+    display: flex;
+    list-style: none;
+    border: solid #915a24;
+    border-width: 1px 0px 1px 0px;
+    padding: 13px;
+
+    a {
+      font-size: 18px;
+      font-family: sans-serif;
+      color: black;
+      margin: 10px 10px 10px 100px;
+      text-decoration: none;
+    }
+    a:active{
+      color: #915a24;
+    }
+  }
+  
+.navBar-links a.active-link {
+  font-weight: bold;
+  color: #915a24; 
+}
+}
